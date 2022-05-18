@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Protein - KYK Hizmet Değerlendirme</title>
+    <link rel="icon" href="/img/Tfavicon.png">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12" style="text-align: center;">
+                <img style="width: 10%; text-align: right;" src="/img/logo2.png">
+            </div>
+            <div class="col-lg-12">
+
+                <div class="card" style="align-items: center; border: 2px solid;">
+                    <p>Kategori Seçiniz:</p>
+                    <form id="review-form" style="align-items: center;">
+                        <input type="radio" id="yemek" name="category" value="YEMEK" description="1">
+                        <label for="yemek" style=" margin-right: 50px;">Yemekhane</label><br>
+                        <input type="radio" id="temizlik" name="category" value="TEMIZLIK" description="2">
+                        <label for="temizlik" style=" margin-right: 50px;">Temizlik</label><br>
+                        <input type="radio" id="sosyal" name="category" value="SOSYAL" description="3">
+                        <label for="sosyal" style=" margin-right:50px;">Sosyal Faaliyetler</label>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="stars">
+                                    <input class="star star-5" id="star-5" type="radio" name="star" value="5"/>
+                                    <label class="star star-5" for="star-5"></label>
+
+                                    <input class="star star-4" id="star-4" type="radio" name="star" value="4"/>
+                                    <label class="star star-4" for="star-4"></label>
+
+                                    <input class="star star-3" id="star-3" type="radio" name="star" value="3"/>
+                                    <label class="star star-3" for="star-3"></label>
+
+                                    <input class="star star-2" id="star-2" type="radio" name="star" value="2"/>
+                                    <label class="star star-2" for="star-2"></label>
+
+                                    <input class="star star-1" id="star-1" type="radio" name="star" value="1" />
+                                    <label class="star star-1" for="star-1"></label>
+
+                                    <label style="text-align: center;" for="gorus">Görüşlerinizi Bildirin:</label>
+
+                                    <textarea id="gorus" name="comment" rows="4" cols="50">
+</textarea>
+                                    <form id='upload-image' action="/action_page.php">
+                                        <label for="img">Fotograf Yükle:</label>
+                                        <input type="file" id="image-input" name="img" accept="image/png, image/jpg">
+
+                                        <div id="display-image">
+                                            
+                                        </div>
+
+                                    <button type="submit" class="btn btn-secondary">Gönder</button>
+                                    </form>
+                    </form>
+
+
+
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+    {{>footer}}
+
+    <script>
+        const form = document.getElementById('review-form')
+        form.addEventListener('submit', getReview)
+
+        async function getReview(event) {
+            event.preventDefault()
+            
+            let category
+            let ctg = document.getElementsByName('category')
+            for(i = 0; i < ctg.length; i++) {
+                if(ctg[i].checked)
+                category = ctg[i].value
+            }
+
+            let stars
+            let str = document.getElementsByName('star')
+            for(i = 0; i < str.length; i++) {
+                if(str[i].checked)
+                stars = str[i].value;
+            }
+
+
+            const result = await fetch('/feedback', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    category,
+                    stars,
+                    //comment
+                })
+            }).then((res) => res.json())
+
+            if (result.status === 'ok') {
+                console.log(result.review)
+                alert('İnceleme alındı!')
+
+            } else {
+                alert(result.error)
+            }
+        }
+    </script>
+
+    <script>
+        const image_input = document.querySelector("#image-input");
+
+        image_input.addEventListener("change", function() {
+        const reader = new FileReader();
+        reader.addEventListener("load", () => {
+            const uploaded_image = reader.result;
+            document.querySelector("#display-image").style.backgroundImage = `url(${uploaded_image})`;
+        });
+        reader.readAsDataURL(this.files[0]);
+        });
+    </script>
+
+    <script src="/js/app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
+        integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js"
+        integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

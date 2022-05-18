@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://emoji-css.afeld.me/emoji.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css">
+    <title>Document</title>
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .container{
+            width:870px;
+            margin:0 auto;
+            padding-top:50px;
+            display:flex;
+            flex-direction: column;
+            align-items: center;
+            
+        }
+
+
+        .container h1{
+            font-weight: 500;
+            text-align: center;
+            margin-bottom:2rem;
+            
+        }
+
+        i{
+            margin-right: 0.5rem;
+            margin-left: 0.5rem;
+        }
+
+        .container .progress-bar{
+            width:500px;
+            height: 30px;
+            background-color: #eee;
+            border-radius:60px;
+            margin-bottom:2rem;
+            position: relative;
+            text-align: center;
+            font-size: 17px;
+            line-height: 30px;
+            box-shadow: 0 0 2px 1px #0000001a;
+
+        }
+
+        .container .badges{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content:center ;
+            row-gap:30px;
+            column-gap: 30px;
+            padding:30px;
+            
+        }
+        
+
+        .container .badges .item{
+            padding:20px;
+            box-shadow: 0 0 5px 3px #0000001a;
+            border-radius: 50%;
+            background-color:#25D366aa;
+
+        }
+
+        .container .badges .item img{
+            width: 200px;
+            height:200px;
+        }
+
+        .progress-bar::before{
+            content:'';
+            position: absolute;
+            top:0;
+            left:0;
+            background-color: #1CC964ff;
+            width:31%;
+            height: 30px;
+            border-radius: 50px;
+            
+        }
+
+        .progress-bar span{
+            position: relative;
+            z-index:10;
+
+        }
+
+        .not-obtained{
+            opacity: 0.5;
+        }
+
+        
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>
+            <i class="em em-trophy" aria-role="presentation" aria-label="TROPHY"></i>
+            Kazanılmış Başarımlar
+            <i class="em em-trophy" aria-role="presentation" aria-label="TROPHY"></i>
+        </h1>
+        <div class="progress-bar"><span>2/5</span></div>
+        <div class="badges">
+            <div class="item"><img src="/img/1.png" alt=""></div>
+            <div class="item"><img src="/img/2.png" alt=""></div>
+            <div class="item"><img src="/img/3.png" alt=""></div>
+            <div class="item not-obtained"><img src="/img/4.png" alt=""></div>
+            <div class="item not-obtained"><img src="/img/5.png" alt=""></div>
+        </div>
+        
+    </div>
+    {{>footer}}
+</body>
+</html>

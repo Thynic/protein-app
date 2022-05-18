@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Protein - KYK Hizmet Değerlendirme</title>
+    <link rel="icon" href="/img/Tfavicon.png">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+      <div class="row mt-2" style="margin-left: 1150px;">
+      <a href="/profile" id="tc"><img style="width: 60%;" src="/img/asd.png"></a>
+      <h5>GSB Puan: 50</h5>
+      </div>
+        <div class="row">
+            <div class="container">
+                <div class="row">
+                        <div class="py-5">
+    <div class="row">
+      <!-- DEMO 4 Item 1-->
+      <a href="/feedback"><div class="col-lg-6 mb-3 mb-lg-0">
+        <div class="hover hover-4 text-white rounded"><img src="/img/feedback.png" alt="">
+          <div class="hover-overlay"></div>
+          <div class="hover-4-content">
+            <h3 class="hover-4-title text-uppercase font-weight-bold mb-0"><span class="font-weight-light">Değerlendirme </span>İşlemleri</h3>
+            <p class="hover-4-description text-uppercase mb-0 small">Yemekhane, temizlik, çamaşırhane ve sosyal hizmetler hakkında değerlendirmelerinizi bu menüden gerçekleştirebilirsiniz.</p>
+          </div>
+        </div>
+        </a>
+      </div>
+      
+      <!-- DEMO 4 Item 2-->
+      <div class="col-lg-6">
+        <a href="/committee"><div class="hover hover-4 text-white rounded"><img src="/img/komite.png" alt="">
+          <div class="hover-overlay"></div>
+          <div class="hover-4-content">
+            <h3 class="hover-4-title text-uppercase font-weight-bold mb-0"><span class="font-weight-light">Komite </span>İşlemleri</h3>
+            <p class="hover-4-description text-uppercase mb-0 small">Üyelik, durum sorgulama ve bildirimlerinizin durumunu görüntüleyebilir, komiteye yeni bildirimlerde bulunabilirsiniz.</p>
+          </div>
+      </div>
+      </a>
+    </div>
+  </div>
+  <div class="row mt-4">
+      <!-- DEMO 4 Item 3-->
+      <a href="/achievements"><div class="col-lg-6 mb-3 mb-lg-0">
+        <div class="hover hover-4 text-white rounded"><img src="/img/achivement.png" alt="">
+          <div class="hover-overlay"></div>
+          <div class="hover-4-content">
+            <h3 class="hover-4-title text-uppercase font-weight-bold mb-0"><span class="font-weight-light">Başarımlar </span></h3>
+            <p class="hover-4-description text-uppercase mb-0 small">Elde ettiğiniz başarımları bu menüden değerlendirebilir, puan işlemlerinizi ve rozetlerinizi kontrol edebilirsiniz.</p>
+          </div>
+        </div>
+        </a>
+      </div>
+      <!-- DEMO 4 Item  4          -->
+      <div class="col-lg-6">
+        <a href="/suggest"><div class="hover hover-4 text-white rounded"><img src="/img/oneri.png" alt="">
+          <div class="hover-overlay"></div>
+          <div class="hover-4-content">
+            <h3 class="hover-4-title text-uppercase font-weight-bold mb-0"><span class="font-weight-light">Bir Önerim Var </span></h3>
+            <p class="hover-4-description text-uppercase mb-0 small">Hizmet aldığınız yurt hakkında, Kredi ve Yurtlar Kurumu’na önerilerinizi sunabilirsiniz.</p>
+          </div>
+      </div>
+    </div>
+    </a>
+  </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{>footer}}
+
+    <script>
+      const tcp = document.getElementById('tc')
+      fetch('/loginCreds').then((response) => {
+        
+        response.json().then(data) => {
+          if (data.error) {
+            //todo
+          } else {
+            tcp.innerHTML = data
+          }
+        }
+      })
+    </script>
+
+    <script src="/js/app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
+</body>
+
+</html>

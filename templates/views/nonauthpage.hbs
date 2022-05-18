@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Protein - KYK Hizmet Değerlendirme</title>
+    <link rel="icon" href="/img/Tfavicon.png">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="time">
+                <h2 style="text-align: right; margin-top: 20px;" id="currentTime"></h2>
+            </div>
+            <div class="col-md-12">
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <section class="Form loginpage" style="border-radius: 30px; margin-top: 120px;">
+                            <div class="container">
+                                <div class="row no-gutters">
+                                    <div class="col-lg-5">
+                                        <img id="gsblogo"
+                                            style="border-top-left-radius:50px ; border-bottom-left-radius: 50px ; width: 300px;"
+                                            src="/img/temsili.png" alt="bakanlik" class="img-fluid mt-2">
+                                    </div>
+                                    <div class="col-lg-7 px-5 pt-5">
+                                        <h4 id="info">Hesabınıza giriş yapın!</h4>
+
+                                        <form id='login-form' autocomplete="on">
+                                            <div class="form-row">
+                                                <div class="col-lg-7">
+                                                    <input type="text" id="tc" placeholder="TC Kimlik Numarası"
+                                                        name="tc" class="form-control my-2 p-3 mt-3">
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="col-lg-7">
+                                                    <input id='password' autocomplete="off" type="password"
+                                                        placeholder="******" class="form-control  my-2 p-3" name="pw">
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="col-lg-7">
+                                                    <button type="submit" style="border: 1px solid;" class="btn1">Giriş
+                                                        Yap!</button>
+                                                </div>
+                                            </div>
+                                            <a class="a" href="#">Şifremi Unuttum</a>
+                                        </form>
+
+                                        <img class="img" src="" alt="">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row" style="margin-top: 181px;">
+            
+        </div>
+    </div>
+    {{>footer}}
+    <script>
+        let img = document.querySelector('#gsblogo')
+        let info = document.querySelector('#info')
+
+        const form = document.getElementById('login-form')
+        form.addEventListener('submit', loginUser)
+
+        async function loginUser(event) {
+            event.preventDefault()
+            const tc = document.getElementById('tc').value
+            const password = document.getElementById('password').value
+
+            const result = await fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    tc,
+                    password
+                })
+            }).then((res) => res.json())
+
+            if (result.status === 'ok') {
+                console.log(result.token)
+                img.src = `https://avatars.dicebear.com/api/avataaars/${tc}.svg`
+
+                info.innerHTML = 'Giriş başarılı! Yönlendiriliyorsunuz..'
+
+                const redirect = () => {
+                    window.location.href = 'http://localhost:3000/main'
+                }
+
+                const myTimeout = setTimeout(redirect, 1000);
+
+            } else {
+                alert(result.error)
+            }
+        }
+
+
+    </script>
+
+    <script>
+        const getCurrentTime = () => {
+            let currentDate = new Date()
+            let hours = currentDate.getHours() > 10 ? currentDate.getHours() : '0' + currentDate.getHours()
+            let minutes = currentDate.getMinutes() > 10 ? currentDate.getMinutes() : '0' + currentDate.getMinutes()
+            let seconds = currentDate.getSeconds() > 10 ? currentDate.getSeconds() : '0' + currentDate.getSeconds()
+
+            let time = hours + ":" + minutes + ":" + seconds
+
+            const h = document.getElementById('currentTime')
+            h.innerHTML = time
+        }
+            
+            const myTimeout = setInterval(getCurrentTime, 1000);
+        
+    </script>
+
+        
+
+
+    <script src="/js/app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
+        integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js"
+        integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy"
+        crossorigin="anonymous"></script>
+
+
+</body>
+
+</html>
